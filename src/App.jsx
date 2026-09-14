@@ -12,9 +12,9 @@ function App() {
 
         gravity: 1,
         friction: 0.99,
-        ballCount: 400,
-        minRadius: 1,
-        maxRadius: 2,
+        ballCount: 150,
+        minRadius: 8,
+        maxRadius: 18,
         initialVelocity: { min: -10, max: 10 },
       });
       window.controls = controls;
@@ -25,7 +25,8 @@ function App() {
     }
   }, []);
   return (
-    <div>
+    <div id="dash">
+      <h1>Bouncy Balls!</h1>
       <canvas ref={canvasRef}></canvas>
     </div>
   );

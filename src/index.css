@@ -1,0 +1,16 @@
+#dash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin: 10px 0px;
+}
+
+canvas {
+  border: 1px solid black;
+  width: 600px;
+  height: 600px;
+}

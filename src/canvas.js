@@ -10,15 +10,14 @@ function randomColor(colors) {
 //
 
 export function initCanvas(canvas, userSettings = {}) {
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
   const settings = Object.assign(
     {
-      xCanvas: parent ? canvas.parentElement.clientWidth : window.innerWidth,
-      yCanvas: parent ? canvas.parentElement.clientHeight : window.innerHeight,
-
       gravity: 1,
       friction: 0.99,
       ballCount: 400,
-      maxRadius: 20,
+      maxRadius: 16,
       minRadius: 8,
       initialVelocity: { min: -2, max: 2 },
     },
@@ -26,25 +25,20 @@ export function initCanvas(canvas, userSettings = {}) {
   );
   const c = canvas.getContext("2d");
 
-  canvas.width = settings.xCanvas;
-  canvas.height = settings.yCanvas;
-
   const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
 
   // Event Listeners
-  function handleResize() {
-    canvas.width = settings.xCanvas;
-    canvas.height = settings.yCanvas;
-
-    init();
-  }
-
   function handleClick() {
     init();
   }
+  const resizeObserver = new ResizeObserver(() => {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    init();
+  });
 
-  addEventListener("resize", handleResize);
   addEventListener("click", handleClick);
+  resizeObserver.observe(canvas);
 
   // Objects
   class Ball {
@@ -135,9 +129,8 @@ export function initCanvas(canvas, userSettings = {}) {
   function destroy() {
     cancelAnimationFrame(animationId);
 
-    //window.removeEventListener("mousemove", handleMouseMove)
-    window.removeEventListener("resize", handleResize);
     window.removeEventListener("click", handleClick);
+    resizeObserver.disconnect();
   }
 
   init();
