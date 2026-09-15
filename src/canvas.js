@@ -10,7 +10,6 @@ function randomColor(colors) {
 }
 
 //
-
 export function initCanvas(canvas, userSettings = {}) {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
@@ -63,14 +62,20 @@ export function initCanvas(canvas, userSettings = {}) {
     }
 
     update() {
-      // Y-AXIS (Floor & Ceiling)
+      // Y-AXIS - Floor check
       if (this.y + this.radius + this.dy > canvas.height) {
+        this.y = canvas.height - this.radius;
+        this.dy = -this.dy * settings.friction;
+      }
+      // Y-AXIS - Ceiling check
+      else if (this.y - this.radius + this.dy < 0) {
+        this.y = this.radius;
         this.dy = -this.dy * settings.friction;
       } else {
         this.dy += +settings.gravity;
       }
 
-      // Y-AXIS (Floor & Ceiling)
+      // X-AXIS (Walls) check
       if (
         // >= and <= not necessary(very minor improvement)
         // can replace both with > and < instead
