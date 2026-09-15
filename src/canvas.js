@@ -1,6 +1,8 @@
 // utils
 function randomIntFromRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  min = Number(min);
+  max = Number(max);
+  return min !== max ? Math.floor(Math.random() * (max - min + 1) + min) : max;
 }
 
 function randomColor(colors) {
@@ -37,7 +39,7 @@ export function initCanvas(canvas, userSettings = {}) {
     init();
   });
 
-  addEventListener("click", handleClick);
+  canvas.addEventListener("click", handleClick);
   resizeObserver.observe(canvas);
 
   // Objects
@@ -61,14 +63,14 @@ export function initCanvas(canvas, userSettings = {}) {
     }
 
     update() {
-      // y axis
+      // Y-AXIS (Floor & Ceiling)
       if (this.y + this.radius + this.dy > canvas.height) {
         this.dy = -this.dy * settings.friction;
       } else {
-        this.dy += settings.gravity;
+        this.dy += +settings.gravity;
       }
 
-      // x axis
+      // Y-AXIS (Floor & Ceiling)
       if (
         // >= and <= not necessary(very minor improvement)
         // can replace both with > and < instead
@@ -133,7 +135,11 @@ export function initCanvas(canvas, userSettings = {}) {
     resizeObserver.disconnect();
   }
 
+  function updateSettings(newSettings) {
+    Object.assign(settings, newSettings);
+  }
+
   init();
   animate();
-  return { reset: init, destroy: destroy };
+  return { reset: init, destroy: destroy, updateSettings };
 }

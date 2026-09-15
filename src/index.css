@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 #dash {
   display: flex;
   flex-direction: column;
@@ -13,4 +18,31 @@ canvas {
   border: 1px solid black;
   width: 600px;
   height: 600px;
+}
+
+#options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid black;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+#options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border: 1px solid black;
 }
