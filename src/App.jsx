@@ -38,63 +38,73 @@ function App() {
   }, [gravity, friction]);
 
   return (
-    <div id="dash">
+    <div
+      id="dash"
+      className="translucent">
       <h1>Bouncy Balls!</h1>
-      <canvas ref={canvasRef}></canvas>
-      <div id="options-container">
-        <h3>Options</h3>
-        <div id="options">
-          <Slider
-            name="Ball Count"
-            min={1}
-            max={1000}
-            value={ballCount}
-            onChange={setBallCount}
-          />
-          <Slider
-            name="Gravity"
-            min={-1}
-            max={2}
-            step={0.05}
-            value={gravity}
-            onChange={setGravity}
-          />
-          <Slider
-            name="Friction"
-            min={0.01}
-            max={1}
-            step={0.01}
-            value={friction}
-            onChange={setFriction}
-          />
-          <Slider
-            name="Ball Min. Radius"
-            min={1}
-            max={ballMaxRadius}
-            value={ballMinRadius}
-            onChange={setBallMinRadius}
-          />
-          <Slider
-            name="Ball Max. Radius"
-            min={ballMinRadius}
-            max={100}
-            value={ballMaxRadius}
-            onChange={setBallMaxRadius}
-          />
-          <Slider
-            name="Ball Min. Velocity"
-            min={1}
-            max={maxVelocity}
-            value={minVelocity}
-            onChange={setMinVelocity}
-          />
-          <Slider
-            name="Ball Max. Velocity"
-            min={minVelocity}
-            max={100}
-            value={maxVelocity}
-            onChange={setMaxVelocity}
-          />
+
+      <div id="dashboard-container">
+        <canvas
+          id="simulation-canvaas"
+          className="translucent"
+          ref={canvasRef}></canvas>
+        <div
+          id="options-container"
+          className="translucent">
+          <h3>Options</h3>
+          <div id="options">
+            <Slider
+              name="Ball Count"
+              min={1}
+              max={1000}
+              value={ballCount}
+              onChange={setBallCount}
+            />
+            <Slider
+              name="Gravity"
+              min={-1}
+              max={2}
+              step={0.05}
+              value={gravity}
+              onChange={setGravity}
+            />
+            <Slider
+              name="Friction"
+              min={0.01}
+              max={1}
+              step={0.01}
+              value={friction}
+              onChange={setFriction}
+            />
+            <Slider
+              name="Ball Min. Radius"
+              min={1}
+              max={ballMaxRadius}
+              value={ballMinRadius}
+              onChange={setBallMinRadius}
+            />
+            <Slider
+              name="Ball Max. Radius"
+              min={ballMinRadius}
+              max={100}
+              value={ballMaxRadius}
+              onChange={setBallMaxRadius}
+            />
+            <Slider
+              name="Ball Min. Velocity"
+              min={1}
+              max={maxVelocity}
+              value={minVelocity}
+              onChange={setMinVelocity}
+            />
+            <Slider
+              name="Ball Max. Velocity"
+              min={minVelocity}
+              max={100}
+              value={maxVelocity}
+              onChange={setMaxVelocity}
+            />
+          </div>
         </div>
       </div>
     </div>
