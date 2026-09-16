@@ -10,7 +10,7 @@ function App() {
   const [ballMaxRadius, setBallMaxRadius] = useState(18);
   const [gravity, setGravity] = useState(1);
   const [friction, setFriction] = useState(0.99);
-  const [minVelocity, setMinVelocity] = useState(10);
+  const [minVelocity, setMinVelocity] = useState(6);
   const [maxVelocity, setMaxVelocity] = useState(10);
 
   useEffect(() => {

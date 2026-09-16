@@ -4,12 +4,18 @@ function randomIntFromRange(min, max) {
   max = Number(max);
   return min !== max ? Math.floor(Math.random() * (max - min + 1) + min) : max;
 }
+function randomFloatRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 function randomColor(colors) {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
 //
+const jitterAmountY = 0.15;
+const jitterAmountX = 0.15;
+
 export function initCanvas(canvas, userSettings = {}) {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
@@ -72,7 +78,12 @@ export function initCanvas(canvas, userSettings = {}) {
         this.y = this.radius;
         this.dy = -this.dy * settings.friction;
       } else {
-        this.dy += +settings.gravity;
+        const gravity = settings.gravity;
+        const strength = Math.abs(gravity);
+        this.dy +=
+          +gravity +
+          randomFloatRange(-strength * jitterAmountY, strength * jitterAmountY);
+        this.dy *= 0.995;
       }
 
       // X-AXIS (Walls) check
@@ -83,6 +94,13 @@ export function initCanvas(canvas, userSettings = {}) {
         this.x - this.radius + this.dx <= 0
       ) {
         this.dx = -this.dx * settings.friction;
+      } else {
+        const strength = Math.abs(this.dx);
+        this.dx += randomFloatRange(
+          -strength * jitterAmountX,
+          strength * jitterAmountX,
+        );
+        this.dx *= 0.995;
       }
 
       this.x += this.dx;
